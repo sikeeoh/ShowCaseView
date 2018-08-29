@@ -417,6 +417,16 @@ public class GuideView extends FrameLayout {
             return this;
         }
 
+        public Builder setContentTextColor(int contentTextColor) {
+            this.contentTextColor = contentTextColor;
+            return this;
+        }
+
+        public Builder setTitleTextColor(int titleTextColor) {
+            this.titleTextColor = titleTextColor;
+            return this;
+        }
+
         public Builder setPaintCircleInnerColor(int paintCircleInnerColor) {
             this.paintCircleInnerColor = paintCircleInnerColor;
             return this;
