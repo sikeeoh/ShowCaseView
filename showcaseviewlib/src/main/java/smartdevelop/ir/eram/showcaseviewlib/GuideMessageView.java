@@ -73,9 +73,17 @@ class GuideMessageView extends LinearLayout {
         mTitleTextView.setText(title);
     }
 
+    public void setTitleTextColor(int titleTextColor) {
+        mTitleTextView.setTextColor(titleTextColor);
+    }
+
 
     public void setContentText(String content) {
         mContentTextView.setText(content);
+    }
+
+    public void setContentTextColor(int contentTextColor) {
+        mContentTextView.setTextColor(contentTextColor);
     }
 
     public void setContentSpan(Spannable content) {
@@ -98,7 +106,7 @@ class GuideMessageView extends LinearLayout {
         mContentTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
     }
 
-    public void setColor(int color) {
+    public void setBackgroundColor(int color) {
 
         mPaint.setAlpha(255);
         mPaint.setColor(color);

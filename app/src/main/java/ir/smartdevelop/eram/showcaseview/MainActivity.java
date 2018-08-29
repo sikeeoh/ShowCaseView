@@ -1,5 +1,6 @@
 package ir.smartdevelop.eram.showcaseview;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle("Guide Title Text")
                 .setContentText("Guide Description Text\n .....Guide Description Text\n .....Guide Description Text .....")
                 .setGravity(GuideView.Gravity.center)
+                .setMessageBackgroundColor(Color.RED)
+                .setPaintLineColor(Color.BLACK)
                 .setDismissType(GuideView.DismissType.outside)
                 .setTargetView(view1)
                 .setGuideListener(new GuideView.GuideListener() {

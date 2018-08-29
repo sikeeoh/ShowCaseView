@@ -83,7 +83,10 @@ public class GuideView extends FrameLayout {
         mMessageView = new GuideMessageView(getContext());
         final int padding = (int) (5 * density);
         mMessageView.setPadding(padding, padding, padding, padding);
-        mMessageView.setColor(Color.WHITE);
+        mMessageView.setBackgroundColor(Color.WHITE);
+        paintCircleInner.setColor(0xffcccccc);
+        paintLine.setColor(Color.WHITE);
+        paintCircle.setColor(Color.WHITE);
 
         addView(mMessageView, new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -136,18 +139,15 @@ public class GuideView extends FrameLayout {
             tempCanvas.drawRect(canvas.getClipBounds(), mPaint);
 
             paintLine.setStyle(Paint.Style.FILL);
-            paintLine.setColor(Color.WHITE);
             paintLine.setStrokeWidth(lineWidth);
             paintLine.setAntiAlias(true);
 
             paintCircle.setStyle(Paint.Style.STROKE);
-            paintCircle.setColor(Color.WHITE);
             paintCircle.setStrokeCap(Paint.Cap.ROUND);
             paintCircle.setStrokeWidth(strokeCircleWidth);
             paintCircle.setAntiAlias(true);
 
             paintCircleInner.setStyle(Paint.Style.FILL);
-            paintCircleInner.setColor(0xffcccccc);
             paintCircleInner.setAntiAlias(true);
 
             marginGuide = (int) (isTop ? 15 * density : -15 * density);
@@ -320,6 +320,29 @@ public class GuideView extends FrameLayout {
         mMessageView.setContentTextSize(size);
     }
 
+    public void setMessageBackgroundColor(int messageBackgroundColor) {
+        mMessageView.setBackgroundColor(messageBackgroundColor);
+    }
+
+    public void setContentTextColor(int contentTextColor) {
+        mMessageView.setContentTextColor(contentTextColor);
+    }
+
+    public void setTitleTextColor(int titleTextColor) {
+        mMessageView.setTitleTextColor(titleTextColor);
+    }
+
+    public void setPaintCircleColor(int paintCircleColor) {
+        paintCircle.setColor(paintCircleColor);
+    }
+
+    public void setPaintLineColor(int paintLineColor) {
+        paintLine.setColor(paintLineColor);
+    }
+
+    public void setPaintCircleInnerColor(int paintCircleInnerColor) {
+        paintCircleInner.setColor(paintCircleInnerColor);
+    }
 
     public static class Builder {
         private View targetView;
@@ -327,8 +350,15 @@ public class GuideView extends FrameLayout {
         private Gravity gravity;
         private DismissType dismissType;
         private Context context;
-        private int titleTextSize;
-        private int contentTextSize;
+        private int titleTextSize = 0;
+        private int contentTextSize = 0;
+        private int messageBackgroundColor = 0;
+        private int contentTextColor = 0;
+        private int titleTextColor = 0;
+        private int paintCircleColor = 0;
+        private int paintLineColor = 0;
+        private int paintCircleInnerColor = 0;
+
         private Spannable contentSpan;
         private Typeface titleTypeFace, contentTypeFace;
         private GuideListener guideListener;
@@ -374,6 +404,26 @@ public class GuideView extends FrameLayout {
 
         public Builder setTitleTypeFace(Typeface typeFace) {
             this.titleTypeFace = typeFace;
+            return this;
+        }
+
+        public Builder setMessageBackgroundColor(int messageBackgroundColor) {
+            this.messageBackgroundColor = messageBackgroundColor;
+            return this;
+        }
+
+        public Builder setPaintCircleColor(int paintCircleColor) {
+            this.paintCircleColor = paintCircleColor;
+            return this;
+        }
+
+        public Builder setPaintCircleInnerColor(int paintCircleInnerColor) {
+            this.paintCircleInnerColor = paintCircleInnerColor;
+            return this;
+        }
+
+        public Builder setPaintLineColor(int paintLineColor) {
+            this.paintLineColor = paintLineColor;
             return this;
         }
 
@@ -426,6 +476,24 @@ public class GuideView extends FrameLayout {
             }
             if (guideListener != null) {
                 guideView.mGuideListener = guideListener;
+            }
+            if (messageBackgroundColor != 0) {
+                guideView.setMessageBackgroundColor(messageBackgroundColor);
+            }
+            if (titleTextColor != 0) {
+                guideView.setTitleTextColor(titleTextColor);
+            }
+            if (contentTextColor != 0) {
+                guideView.setContentTextColor(contentTextColor);
+            }
+            if (paintCircleColor != 0) {
+                guideView.setPaintCircleColor(paintCircleColor);
+            }
+            if (paintCircleInnerColor != 0) {
+                guideView.setPaintCircleInnerColor(paintCircleInnerColor);
+            }
+            if (paintLineColor != 0) {
+                guideView.setPaintLineColor(paintLineColor);
             }
 
             return guideView;
