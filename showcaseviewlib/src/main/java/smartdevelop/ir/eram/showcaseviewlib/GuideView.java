@@ -122,55 +122,57 @@ public class GuideView extends FrameLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         try {
+            super.onDraw(canvas);
             if (target != null) {
-                Bitmap bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas tempCanvas = new Canvas(bitmap);
+                if (canvas.getWidth() > 0 && canvas.getHeight() > 0) {
+                    Bitmap bitmap = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
+                    Canvas tempCanvas = new Canvas(bitmap);
 
-                float lineWidth = 3 * density;
-                float strokeCircleWidth = 3 * density;
-                float circleSize = 6 * density;
-                float circleInnerSize = 5f * density;
-
-
-                mPaint.setColor(0xdd000000);
-                mPaint.setStyle(Paint.Style.FILL);
-                mPaint.setAntiAlias(true);
-                tempCanvas.drawRect(canvas.getClipBounds(), mPaint);
-
-                paintLine.setStyle(Paint.Style.FILL);
-                paintLine.setStrokeWidth(lineWidth);
-                paintLine.setAntiAlias(true);
-
-                paintCircle.setStyle(Paint.Style.STROKE);
-                paintCircle.setStrokeCap(Paint.Cap.ROUND);
-                paintCircle.setStrokeWidth(strokeCircleWidth);
-                paintCircle.setAntiAlias(true);
-
-                paintCircleInner.setStyle(Paint.Style.FILL);
-                paintCircleInner.setAntiAlias(true);
-
-                marginGuide = (int) (isTop ? 15 * density : -15 * density);
-
-                float startYLineAndCircle = (isTop ? rect.bottom : rect.top) + marginGuide;
-
-                float x = (rect.left / 2 + rect.right / 2);
-                float stopY = (yMessageView + INDICATOR_HEIGHT * density);
-
-                tempCanvas.drawLine(x, startYLineAndCircle, x,
-                        stopY
-                        , paintLine);
-
-                tempCanvas.drawCircle(x, startYLineAndCircle, circleSize, paintCircle);
-                tempCanvas.drawCircle(x, startYLineAndCircle, circleInnerSize, paintCircleInner);
+                    float lineWidth = 3 * density;
+                    float strokeCircleWidth = 3 * density;
+                    float circleSize = 6 * density;
+                    float circleInnerSize = 5f * density;
 
 
-                targetPaint.setXfermode(XFERMODE_CLEAR);
-                targetPaint.setAntiAlias(true);
+                    mPaint.setColor(0xdd000000);
+                    mPaint.setStyle(Paint.Style.FILL);
+                    mPaint.setAntiAlias(true);
+                    tempCanvas.drawRect(canvas.getClipBounds(), mPaint);
 
-                tempCanvas.drawRoundRect(rect, 15, 15, targetPaint);
-                canvas.drawBitmap(bitmap, 0, 0, emptyPaint);
+                    paintLine.setStyle(Paint.Style.FILL);
+                    paintLine.setStrokeWidth(lineWidth);
+                    paintLine.setAntiAlias(true);
+
+                    paintCircle.setStyle(Paint.Style.STROKE);
+                    paintCircle.setStrokeCap(Paint.Cap.ROUND);
+                    paintCircle.setStrokeWidth(strokeCircleWidth);
+                    paintCircle.setAntiAlias(true);
+
+                    paintCircleInner.setStyle(Paint.Style.FILL);
+                    paintCircleInner.setAntiAlias(true);
+
+                    marginGuide = (int) (isTop ? 15 * density : -15 * density);
+
+                    float startYLineAndCircle = (isTop ? rect.bottom : rect.top) + marginGuide;
+
+                    float x = (rect.left / 2 + rect.right / 2);
+                    float stopY = (yMessageView + INDICATOR_HEIGHT * density);
+
+                    tempCanvas.drawLine(x, startYLineAndCircle, x,
+                            stopY
+                            , paintLine);
+
+                    tempCanvas.drawCircle(x, startYLineAndCircle, circleSize, paintCircle);
+                    tempCanvas.drawCircle(x, startYLineAndCircle, circleInnerSize, paintCircleInner);
+
+
+                    targetPaint.setXfermode(XFERMODE_CLEAR);
+                    targetPaint.setAntiAlias(true);
+
+                    tempCanvas.drawRoundRect(rect, 15, 15, targetPaint);
+                    canvas.drawBitmap(bitmap, 0, 0, emptyPaint);
+                }
             }
         } catch (Exception e) {
             if (isShowing()) dismiss();
